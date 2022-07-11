@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.Snow.Cqrs", "src\Lykke.Snow.Cqrs\Lykke.Snow.Cqrs.csproj", "{DA70861A-45E7-4E97-95F7-B927B2A4AD64}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA70861A-45E7-4E97-95F7-B927B2A4AD64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA70861A-45E7-4E97-95F7-B927B2A4AD64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA70861A-45E7-4E97-95F7-B927B2A4AD64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA70861A-45E7-4E97-95F7-B927B2A4AD64}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
