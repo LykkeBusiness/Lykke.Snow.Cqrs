@@ -12,7 +12,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release "Lykke.Snow.Cqrs.sln"
     - name: Create the package
       run: dotnet pack --include-symbols --include-source --configuration Release src/Lykke.Snow.Cqrs/Lykke.Snow.Cqrs.csproj /p:Version=${GITHUB_REF#refs/tags/}
     - name: Publish the package to Nuget
