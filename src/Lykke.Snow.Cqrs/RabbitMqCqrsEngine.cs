@@ -6,6 +6,7 @@ using Lykke.Messaging;
 using Lykke.Messaging.Configuration;
 using Lykke.Messaging.Contract;
 using Lykke.Messaging.RabbitMq;
+using Lykke.Snow.Cqrs.Logging;
 using Microsoft.Extensions.Logging;
 
 namespace Lykke.Snow.Cqrs
@@ -77,8 +78,10 @@ namespace Lykke.Snow.Cqrs
             string rabbitMqPassword)
         {
             var transportResolver = CreateTransport(rabbitMqEndpoint, rabbitMqUserName, rabbitMqPassword);
+            var engine = new MessagingEngine(loggerFactory, transportResolver,
+                new RabbitMqTransportFactory(loggerFactory));
 
-            return new MessagingEngine(loggerFactory, transportResolver, new RabbitMqTransportFactory(loggerFactory));
+            return new LoggingMessagingEngineDecorator(engine, loggerFactory);
         }
 
         private static ITransportResolver CreateTransport(string rabbitMqEndpoint,
