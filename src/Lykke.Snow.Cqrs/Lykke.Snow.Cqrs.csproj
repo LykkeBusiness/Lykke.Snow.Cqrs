@@ -13,8 +13,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="LykkeBiz.Messaging.RabbitMq" Version="6.0.3" />
-        <PackageReference Include="LykkeBiz.Cqrs" Version="13.0.0" />
+        <PackageReference Include="LykkeBiz.Messaging.RabbitMq" Version="6.0.4" />
+        <PackageReference Include="LykkeBiz.Cqrs" Version="13.0.1" />
     </ItemGroup>
 
 </Project>
