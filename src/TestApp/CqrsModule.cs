@@ -3,6 +3,7 @@ using Lykke.Cqrs;
 using Lykke.Cqrs.Configuration;
 using Lykke.Cqrs.Configuration.BoundedContext;
 using Lykke.Cqrs.Configuration.Routing;
+using Lykke.Messaging.RabbitMq.Retry;
 using Lykke.Messaging.Serialization;
 using Lykke.Snow.Cqrs;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +32,6 @@ public class CqrsModule : Module
 
         builder.RegisterInstance(_contextNames).AsSelf().SingleInstance();
 
-
         builder.Register(CreateEngine)
             .As<ICqrsEngine>()
             .SingleInstance()
@@ -50,15 +50,16 @@ public class CqrsModule : Module
             Uri = new Uri(_configuration.GetConnectionString("rabbitmq"), UriKind.Absolute)
         };
 
-        var log = ctx.Resolve<ILoggerFactory>();
-
         var engine = new RabbitMqCqrsEngine(
-            log,
+            ctx.Resolve<ILoggerFactory>(),
             ctx.Resolve<IDependencyResolver>(),
             new DefaultEndpointProvider(),
             rabbitMqSettings.Endpoint.ToString(),
             rabbitMqSettings.UserName,
             rabbitMqSettings.Password,
+            true,
+            TimeSpan.FromSeconds(15),
+            ctx.Resolve<IRetryPolicyProvider>(),
             Register.DefaultEndpointResolver(rabbitMqConventionEndpointResolver),
             RegisterContext(),
             RegisterDefaultRouting()
