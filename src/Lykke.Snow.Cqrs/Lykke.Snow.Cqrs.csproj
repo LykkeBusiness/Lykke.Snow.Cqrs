@@ -3,9 +3,6 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>8.0</LangVersion>
-    </PropertyGroup>
-
-    <PropertyGroup>
         <Version>3.0.7</Version>
         <Company>Lykke Business</Company>
         <Copyright>Copyright (c) 2022 Lykke Business.</Copyright>
