@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>3.0.6</Version>
+        <Version>3.0.7</Version>
         <Company>Lykke Business</Company>
         <Copyright>Copyright (c) 2022 Lykke Business.</Copyright>
         <PackageId>LykkeBiz.Snow.Cqrs</PackageId>
