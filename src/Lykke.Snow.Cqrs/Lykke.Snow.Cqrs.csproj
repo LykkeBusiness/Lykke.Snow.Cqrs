@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="LykkeBiz.Messaging.RabbitMq" Version="6.0.6" />
+        <PackageReference Include="LykkeBiz.Messaging.RabbitMq" Version="6.0.5" />
         <PackageReference Include="LykkeBiz.Cqrs" Version="13.0.1" />
     </ItemGroup>
 
