@@ -1,7 +1,5 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Lykke.Messaging.RabbitMq;
-using Lykke.Messaging.RabbitMq.Retry;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,13 +19,7 @@ var hostBuilder = Host.CreateDefaultBuilder(args)
         builder.AddUserSecrets<Program>();
     })
     .ConfigureLogging(x => x.AddConsole())
-    .ConfigureServices((context, services) =>
-    {
-        services.Configure<RabbitMqRetryPolicyOptions>(
-                context.Configuration.GetSection(RabbitMqRetryPolicyOptions.RabbitMqRetryPolicyOptionsName))
-            .AddRabbitMqMessaging();
-        services.AddSingleton<App>();
-    });
+    .ConfigureServices((context, services) => { services.AddSingleton<App>(); });
 
 var host = hostBuilder.Build();
 

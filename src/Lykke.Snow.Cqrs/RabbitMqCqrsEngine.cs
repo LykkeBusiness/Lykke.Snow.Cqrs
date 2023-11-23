@@ -1,12 +1,11 @@
-using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Lykke.Cqrs;
 using Lykke.Cqrs.Configuration;
 using Lykke.Messaging;
 using Lykke.Messaging.Configuration;
 using Lykke.Messaging.Contract;
 using Lykke.Messaging.RabbitMq;
-using Lykke.Messaging.RabbitMq.Retry;
 using Lykke.Snow.Cqrs.Logging;
 using Microsoft.Extensions.Logging;
 
@@ -16,22 +15,15 @@ namespace Lykke.Snow.Cqrs
     /// Cqrs engine with RabbitMQ transport resolver.
     /// Takes care of messaging engine creation and disposal.
     /// </summary>
+    [PublicAPI]
     public class RabbitMqCqrsEngine : CqrsEngine
     {
         public RabbitMqCqrsEngine(ILoggerFactory loggerFactory,
             string endpoint,
             string username,
             string password,
-            TimeSpan automaticRecoveryInterval,
-            IRetryPolicyProvider retryPolicyProvider,
             params IRegistration[] registrations) : base(loggerFactory,
-            CreateMessagingEngine(loggerFactory,
-                endpoint,
-                username,
-                password,
-                automaticRecoveryInterval,
-                retryPolicyProvider),
-            registrations)
+            CreateMessagingEngine(loggerFactory, endpoint, username, password), registrations)
         {
         }
 
@@ -40,16 +32,8 @@ namespace Lykke.Snow.Cqrs
             string endpoint,
             string username,
             string password,
-            TimeSpan automaticRecoveryInterval,
-            IRetryPolicyProvider retryPolicyProvider,
             params IRegistration[] registrations) : base(loggerFactory,
-            CreateMessagingEngine(loggerFactory,
-                endpoint,
-                username,
-                password,
-                automaticRecoveryInterval,
-                retryPolicyProvider), 
-            endpointProvider,
+            CreateMessagingEngine(loggerFactory, endpoint, username, password), endpointProvider,
             registrations)
         {
         }
@@ -60,17 +44,8 @@ namespace Lykke.Snow.Cqrs
             string endpoint,
             string username,
             string password,
-            TimeSpan automaticRecoveryInterval,
-            IRetryPolicyProvider retryPolicyProvider,
-            params IRegistration[] registrations) : base(loggerFactory,
-            dependencyResolver,
-            CreateMessagingEngine(loggerFactory,
-                endpoint,
-                username,
-                password,
-                automaticRecoveryInterval,
-                retryPolicyProvider),
-            endpointProvider,
+            params IRegistration[] registrations) : base(loggerFactory, dependencyResolver,
+            CreateMessagingEngine(loggerFactory, endpoint, username, password), endpointProvider,
             registrations)
         {
         }
@@ -82,19 +57,9 @@ namespace Lykke.Snow.Cqrs
             string username,
             string password,
             bool createMissingEndpoints,
-            TimeSpan automaticRecoveryInterval,
-            IRetryPolicyProvider retryPolicyProvider,
-            params IRegistration[] registrations) : base(loggerFactory,
-            dependencyResolver,
-            CreateMessagingEngine(loggerFactory,
-                endpoint,
-                username,
-                password,
-                automaticRecoveryInterval,
-                retryPolicyProvider),
-            endpointProvider,
-            createMissingEndpoints,
-            registrations)
+            params IRegistration[] registrations) : base(loggerFactory, dependencyResolver,
+            CreateMessagingEngine(loggerFactory, endpoint, username, password), endpointProvider,
+            createMissingEndpoints, registrations)
         {
         }
 
@@ -110,22 +75,20 @@ namespace Lykke.Snow.Cqrs
         private static IMessagingEngine CreateMessagingEngine(ILoggerFactory loggerFactory,
             string rabbitMqEndpoint,
             string rabbitMqUserName,
-            string rabbitMqPassword,
-            TimeSpan automaticRecoveryInterval,
-            IRetryPolicyProvider retryPolicyProvider)
+            string rabbitMqPassword)
         {
             var transportResolver = CreateTransport(rabbitMqEndpoint, rabbitMqUserName, rabbitMqPassword);
             var engine = new MessagingEngine(loggerFactory, transportResolver,
-                new RabbitMqTransportFactory(loggerFactory, automaticRecoveryInterval, retryPolicyProvider));
+                new RabbitMqTransportFactory(loggerFactory));
 
             return new LoggingMessagingEngineDecorator(engine, loggerFactory);
         }
 
-        private static ITransportInfoResolver CreateTransport(string rabbitMqEndpoint,
+        private static ITransportResolver CreateTransport(string rabbitMqEndpoint,
             string rabbitMqUserName,
             string rabbitMqPassword)
         {
-            return new TransportInfoResolver(new Dictionary<string, TransportInfo>
+            return new TransportResolver(new Dictionary<string, TransportInfo>
             {
                 {
                     "RabbitMq",
