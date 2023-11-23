@@ -7,20 +7,8 @@ namespace Lykke.Snow.Cqrs.Logging
 {
     public class OutgoingMessageLogger
     {
-        private static readonly List<string> DefaultFilteredMessageTypes;
-
         private readonly List<string> _filteredMessageTypes;
         private readonly ILogger _logger;
-
-        static OutgoingMessageLogger()
-        {
-            var ignoredTypesStr = Environment.GetEnvironmentVariable("NOVA_FILTERED_MESSAGE_TYPES");
-            DefaultFilteredMessageTypes = ignoredTypesStr?
-                                              .Split(',')
-                                              .Select(x => x.Trim())
-                                              .ToList()
-                                          ?? new List<string>();
-        }
 
         /// <summary>
         /// Creates a logger that logs outgoing messages.
@@ -30,7 +18,10 @@ namespace Lykke.Snow.Cqrs.Logging
         public OutgoingMessageLogger(ILogger logger)
         {
             _logger = logger;
-            _filteredMessageTypes = DefaultFilteredMessageTypes;
+
+            var ignoredTypesStr = Environment.GetEnvironmentVariable("NOVA_FILTERED_MESSAGE_TYPES");
+            _filteredMessageTypes = ignoredTypesStr?.Split(',').ToList()
+                                    ?? new List<string>();
         }
 
         /// <summary>
@@ -40,10 +31,8 @@ namespace Lykke.Snow.Cqrs.Logging
         /// <exception cref="NullReferenceException"></exception>
         public OutgoingMessageLogger(List<string> filteredMessageTypes, ILogger logger)
         {
-            if (filteredMessageTypes == null) throw new NullReferenceException(nameof(filteredMessageTypes));
-            _filteredMessageTypes = filteredMessageTypes
-                .Select(x => x.Trim())
-                .ToList();
+            _filteredMessageTypes =
+                filteredMessageTypes ?? throw new NullReferenceException(nameof(filteredMessageTypes));
             _logger = logger;
         }
 

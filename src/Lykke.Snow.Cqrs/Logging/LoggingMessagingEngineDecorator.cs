@@ -53,6 +53,7 @@ namespace Lykke.Snow.Cqrs.Logging
 
         public void Dispose()
         {
+            _messagingEngine.Dispose();
         }
 
         public void AddProcessingGroup(string name, ProcessingGroupInfo info)
