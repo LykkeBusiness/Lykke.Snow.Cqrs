@@ -1,4 +1,4 @@
-## [[tbd]] (2023-11-23)
+## 4.0.1 (2023-11-23)
 
 ### Removed
 * Revert Cqrs updates
