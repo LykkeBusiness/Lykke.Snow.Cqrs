@@ -1,3 +1,8 @@
+## [[tbd]] (2024-06-17)
+
+### Changed
+* Bump LykkeBiz.Messaging.RabbitMq -> 8.0.0 (RabbitMQ.Client 6.4.0)
+
 ## 4.0.2 (2023-11-23)
 
 ### Removed
