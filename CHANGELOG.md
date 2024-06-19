@@ -1,3 +1,9 @@
+## [[tbd]] (2024-06-19)
+
+### Changed
+* Bump LykkeBiz.Messaging.RabbitMq -> 8.1.0
+* Bump LykkeBiz.Cqrs -> 14.1.0
+
 ## 5.0.0 (2024-06-17)
 
 ### Changed
