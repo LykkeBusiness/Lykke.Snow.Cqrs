@@ -9,8 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="LykkeBiz.Messaging.RabbitMq" Version="8.0.0" />
-      <PackageReference Include="LykkeBiz.Cqrs" Version="14.0.0" />
+      <PackageReference Include="LykkeBiz.Messaging.RabbitMq" Version="8.1.0" />
+      <PackageReference Include="LykkeBiz.Cqrs" Version="14.1.0" />
     </ItemGroup>
 
 </Project>
