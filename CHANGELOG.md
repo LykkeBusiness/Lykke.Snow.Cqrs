@@ -1,7 +1,6 @@
-## [[tbd]] (September 27, 2024)
-* Fix yml
+## [[tbd]] (October 1, 2024)
 
-## 6.0.0 (September 27, 2024)
+### Changed
 * Migrate to .NET 8
 
 ## 5.1.0 (2024-06-19)
