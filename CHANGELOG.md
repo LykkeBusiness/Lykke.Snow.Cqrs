@@ -1,4 +1,9 @@
-## 6.0.0 (October 2, 2024)
+## [[tbd]] (2024-10-02)
+
+### Changed
+* Fix nuget publish workflow
+
+## 6.0.0 (2024-10-02)
 
 ### Changed
 * Migrate to .NET 8
