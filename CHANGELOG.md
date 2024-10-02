@@ -1,4 +1,4 @@
-## [[tbd]] (2024-10-02)
+## 6.0.2 (2024-10-02)
 
 ### Changed
 * Fix nuget publish workflow
