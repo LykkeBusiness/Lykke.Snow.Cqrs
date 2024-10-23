@@ -1,3 +1,8 @@
+## [[tbd]] ([[date]])
+
+### Fixed
+* Loading MessagePack types in runtime
+
 ## 7.0.0 (2024-10-23)
 
 ### Changed
